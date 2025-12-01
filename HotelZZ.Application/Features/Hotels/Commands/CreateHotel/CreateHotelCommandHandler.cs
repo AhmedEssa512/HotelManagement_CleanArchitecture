@@ -29,7 +29,11 @@ namespace HotelZZ.Application.Features.Hotels.Commands.CreateHotel
             {
                 using var stream = request.Image.OpenReadStream();
 
-                var uploadResult = await _imageService.UploadAsync(stream, request.Image.FileName, cancellationToken);
+                var uploadResult = await _imageService.UploadAsync(
+                    stream,
+                    request.Image.FileName,
+                    folderName:"hotels",
+                    cancellationToken);
 
                 hotel.ImageUrl = uploadResult.Value.Url;
                 hotel.Identifier = uploadResult.Value.Identifier;

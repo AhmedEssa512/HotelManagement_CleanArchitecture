@@ -16,14 +16,14 @@ namespace HotelZZ.Infrastructure.Services
         }
 
 
-        public async Task<Result<ImageUploadInfo>> UploadAsync(Stream stream, string fileName, CancellationToken cancellationToken = default)
+        public async Task<Result<ImageUploadInfo>> UploadAsync(Stream stream, string fileName, string folderName, CancellationToken cancellationToken = default)
         {
                 try
                 {
                     var uploadParams = new ImageUploadParams
                     {
                         File = new FileDescription(fileName, stream),
-                        Folder = "hotels"
+                        Folder = folderName
                     };
 
                     var result = await _cloudinary.UploadAsync(uploadParams, cancellationToken);
