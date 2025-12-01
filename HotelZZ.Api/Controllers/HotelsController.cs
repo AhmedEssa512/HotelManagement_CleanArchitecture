@@ -37,7 +37,7 @@ namespace HotelZZ.Api.Controllers
             if(result.IsFailure)
               return BadRequest(result.Errors);
             
-            return Ok("Added Successfullty");
+            return Ok("Added Successfully");
         }
 
         
