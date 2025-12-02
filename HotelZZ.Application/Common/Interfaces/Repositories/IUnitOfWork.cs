@@ -1,13 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace HotelZZ.Application.Common.Interfaces.Repositories
 {
     public interface IUnitOfWork
     {
         IHotelRepository Hotels { get; }
+        IRoomRepository Rooms { get; }
+        IRoomTypeRepository RoomTypes { get; }
+        IAmenityRepository Amenities { get; }
 
         Task<int> SaveChangesAsync(CancellationToken cancellationToken = default);
     }
