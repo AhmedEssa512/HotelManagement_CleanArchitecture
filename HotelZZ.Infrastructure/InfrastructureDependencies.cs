@@ -60,6 +60,10 @@ namespace HotelZZ.Infrastructure
             services.AddScoped<IImageService, CloudinaryImageService>();
 
             services.AddScoped<IHotelRepository, HotelRepository>();
+            services.AddScoped<IRoomRepository, RoomRepository>();
+            services.AddScoped<IRoomTypeRepository, RoomTypeRepository>();
+            services.AddScoped<IAmenityRepository, AmenityRepository>();
+
             services.AddScoped<IUnitOfWork, UnitOfWork>();
 
 

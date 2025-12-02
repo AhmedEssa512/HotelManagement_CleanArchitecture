@@ -13,15 +13,28 @@ namespace HotelZZ.Infrastructure.Repositories
 
         public UnitOfWork(
             ApplicationDbContext context,
-            IHotelRepository hotels
+            IHotelRepository hotels,
+            IRoomRepository rooms,
+            IRoomTypeRepository roomTypes,
+            IAmenityRepository amenities
+
         )
         {
             _context = context;
             Hotels = hotels;
+            Rooms = rooms;
+            RoomTypes = roomTypes;
+            Amenities = amenities;
         }
 
         
         public IHotelRepository Hotels { get; }
+        public IRoomRepository Rooms { get; }
+        public IRoomTypeRepository RoomTypes { get; }
+        public IAmenityRepository Amenities { get; }
+
+
+
 
         public async Task<int> SaveChangesAsync(CancellationToken cancellationToken = default)
         {
