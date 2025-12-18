@@ -2,6 +2,8 @@ using HotelZZ.Api.DTOs;
 using HotelZZ.Api.Models;
 using HotelZZ.Application.Common.Files;
 using HotelZZ.Application.Features.Hotels.Commands.CreateHotel;
+using HotelZZ.Application.Features.rooms.Queries.GetRooms;
+using HotelZZ.Domain.Entities.Enums;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
 
@@ -39,6 +41,20 @@ namespace HotelZZ.Api.Controllers
             
             return Ok("Added Successfully");
         }
+
+
+        [HttpGet("{hotelId}/rooms")]
+        public async Task<IActionResult> GetRooms(
+            int hotelId,
+            [FromQuery] int pageNumber = 1,
+            [FromQuery] int pageSize = 10,
+            [FromQuery] RoomStatus? status = null)
+        {
+            var result = await _mediator.Send(
+                new GetRoomsQuery(hotelId, pageNumber, pageSize, status));
+            return Ok(result);
+        }
+
 
         
     }
