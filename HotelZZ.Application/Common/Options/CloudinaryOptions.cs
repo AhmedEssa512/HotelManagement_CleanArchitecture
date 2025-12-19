@@ -1,8 +1,8 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace HotelZZ.Infrastructure.Settings
+namespace HotelZZ.Application.Common.Options
 {
-    public class CloudinarySettings
+    public class CloudinaryOptions
     {
         [Required]
         public string CloudName { get; set; } = string.Empty;
