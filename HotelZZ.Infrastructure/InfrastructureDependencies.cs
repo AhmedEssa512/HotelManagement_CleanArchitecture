@@ -1,11 +1,11 @@
 using CloudinaryDotNet;
 using HotelZZ.Application.Common.Interfaces.Repositories;
 using HotelZZ.Application.Common.Interfaces.Services;
+using HotelZZ.Application.Common.Options;
 using HotelZZ.Infrastructure.Persistence;
 using HotelZZ.Infrastructure.Persistence.IdentityModel;
 using HotelZZ.Infrastructure.Repositories;
 using HotelZZ.Infrastructure.Services;
-using HotelZZ.Infrastructure.Settings;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -35,16 +35,21 @@ namespace HotelZZ.Infrastructure
             .AddRoles<IdentityRole>()
             .AddEntityFrameworkStores<ApplicationDbContext>();
 
-            // Bind & validate Cloudinary settings
-            services.Configure<CloudinarySettings>(config.GetSection("Cloudinary"));
 
-            services.AddOptions<CloudinarySettings>()
+	    services.Configure<JwtOptions>(
+                config.GetSection("Jwt"));	
+
+            // Bind & validate Cloudinary 
+            services.Configure<CloudinaryOptions>(config.GetSection("Cloudinary"));
+
+            services.AddOptions<CloudinaryOptions>()
                 .ValidateDataAnnotations()
                 .ValidateOnStart();
 
+
             services.AddSingleton(provider =>
             {
-                var settings = provider.GetRequiredService<IOptions<CloudinarySettings>>().Value;
+                var settings = provider.GetRequiredService<IOptions<CloudinaryOptions>>().Value;
 
                 var account = new Account(
                     settings.CloudName,
